@@ -1,9 +1,15 @@
+
+// Import React hooks from the React library
+// useState to store component data (state)
+// useEffect to run code when the component loads
 import { useEffect, useState } from "react";
 
+
+// Main React component
 function App() {
   const [products, setProducts] = useState([]);
 
-  
+// Fetch products once when the component loads
   useEffect(() => {
     fetch("http://localhost:5000/api/products")
       .then((res) => res.json())
@@ -17,7 +23,12 @@ function App() {
       method: "DELETE",
     });
 
+// Update the UI by removing the deleted product from state
+    setProducts(products.filter((product) => product._id !== id));
+  };
 
+
+ // Render the UI
  return (
     <div style={{ padding: "20px" }}>
       <h1>Products</h1>
